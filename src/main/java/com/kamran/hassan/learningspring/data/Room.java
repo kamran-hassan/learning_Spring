@@ -1,15 +1,15 @@
 package com.kamran.hassan.learningspring.data;
 
-import javax.persistence.*;
+import javax.persistence.*;    // Docs -> https://docs.oracle.com/javaee/7/api/javax/persistence/package-summary.html
 
-@Entity
-@Table(name="ROOM")
+@Entity             // specifies this class is an entity
+@Table(name="ROOM")         // Specifies the primary table for the annotated entity.
 public class Room {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO) // Provides for the specification of generation strategies for the values of primary keys.
     @Column(name="ROOM_ID")
     private long id;
-    @Column(name="NAME")
+    @Column(name="NAME")    // Specifies the mapped column for a persistent property or field.
     private String name;
     @Column(name="ROOM_NUMBER")
     private String roomNumber;
