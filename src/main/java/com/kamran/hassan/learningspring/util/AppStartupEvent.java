@@ -6,6 +6,8 @@ import org.springframework.stereotype.Component;
 import com.kamran.hassan.learningspring.data.RoomRepository;
 import com.kamran.hassan.learningspring.data.Room;
 
+
+// When Application is ready do the operation that what it means
 @Component
 public class AppStartupEvent implements ApplicationListener<ApplicationReadyEvent> {
     private final RoomRepository roomRepository;
