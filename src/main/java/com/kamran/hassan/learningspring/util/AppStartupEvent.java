@@ -9,16 +9,21 @@ import com.kamran.hassan.learningspring.data.Room;
 import com.kamran.hassan.learningspring.data.Guest;
 import com.kamran.hassan.learningspring.data.GuestRepository;
 
+import com.kamran.hassan.learningspring.data.Reservation;
+import com.kamran.hassan.learningspring.data.ReservationRepo;
+
 
 // When Application is ready do the operation that what it means
 @Component
 public class AppStartupEvent implements ApplicationListener<ApplicationReadyEvent> {
     private final RoomRepository roomRepository;
     private final GuestRepository guestRepository;
+    private final ReservationRepo reservationRepo;
 
-    public AppStartupEvent(RoomRepository roomRepository, GuestRepository guestRepository) {
+    public AppStartupEvent(RoomRepository roomRepository, GuestRepository guestRepository, ReservationRepo reservationRepo) {
         this.roomRepository = roomRepository;
         this.guestRepository = guestRepository;
+        this.reservationRepo = reservationRepo;
 
     }
 
@@ -29,5 +34,8 @@ public class AppStartupEvent implements ApplicationListener<ApplicationReadyEven
 
         Iterable<Guest> guests = this.guestRepository.findAll();
         guests.forEach(System.out::println);
+
+        Iterable<Reservation> reservations = this.reservationRepo.findAll();
+        reservations.forEach(System.out::println);
     }
 }
