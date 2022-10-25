@@ -48,12 +48,12 @@ public class AppStartupEvent implements ApplicationListener<ApplicationReadyEven
         if(reservationById.isPresent()) System.out.println(reservationById); else System.out.println("No Data Found");
 
         System.out.println("--------Search using other data point like RoomId--------");
-        Optional<Reservation> reservationByRoomId = this.reservationRepo.findByRoomId((long)8);
+        Optional<Reservation> reservationByRoomId = this.reservationRepo.findByRoomId((long)8);   // As per business logic this can only return one value or nothing so optional is used to avoid null check
         if(reservationByRoomId.isPresent()) System.out.println(reservationByRoomId); else System.out.println("No Data Found");
 
         System.out.println("--------Search using Date value=-------");
         try {
-            Iterable<Reservation> reservationByDate = this.reservationRepo.findByDate(new SimpleDateFormat("yyyy-mm-dd").parse("2022-01-01"));
+            Iterable<Reservation> reservationByDate = this.reservationRepo.findByDate(new SimpleDateFormat("yyyy-mm-dd").parse("2022-01-01")); // may return list so Iterable is used
             reservationByDate.forEach(System.out::println);
         }
         catch (Exception e){
