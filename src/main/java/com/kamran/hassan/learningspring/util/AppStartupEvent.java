@@ -12,6 +12,11 @@ import com.kamran.hassan.learningspring.data.GuestRepository;
 import com.kamran.hassan.learningspring.data.Reservation;
 import com.kamran.hassan.learningspring.data.ReservationRepo;
 
+import java.util.Optional;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 
 // When Application is ready do the operation that what it means
 @Component
@@ -37,5 +42,24 @@ public class AppStartupEvent implements ApplicationListener<ApplicationReadyEven
 
         Iterable<Reservation> reservations = this.reservationRepo.findAll();
         reservations.forEach(System.out::println);
+
+        System.out.println("----------Search using Id Primary Key----------");
+        Optional<Reservation> reservationById = this.reservationRepo.findById((long)1);
+        if(reservationById.isPresent()) System.out.println(reservationById); else System.out.println("No Data Found");
+
+        System.out.println("--------Search using other data point like RoomId--------");
+        Optional<Reservation> reservationByRoomId = this.reservationRepo.findByRoomId((long)8);
+        if(reservationByRoomId.isPresent()) System.out.println(reservationByRoomId); else System.out.println("No Data Found");
+
+        System.out.println("--------Search using Date value=-------");
+        try {
+            Optional<Reservation> reservationByDate = this.reservationRepo.findByDate(new SimpleDateFormat("yyyy-mm-dd").parse("2022-01-01"));
+            if(reservationByDate.isPresent()) System.out.println(reservationByDate); else System.out.println("No data Found");
+        }
+        catch (Exception e){
+            System.out.println("Date Format Exception");
+        }
+
+
     }
 }
