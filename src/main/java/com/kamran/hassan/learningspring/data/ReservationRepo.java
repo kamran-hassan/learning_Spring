@@ -9,5 +9,6 @@ import java.util.Date;
 @Repository
 public interface ReservationRepo extends CrudRepository<Reservation, Long> {
     Optional<Reservation> findByRoomId(long roomId);
-    Optional<Reservation> findByDate(Date date);
+    Iterable<Reservation> findByDate(Date date);
+    Optional<Reservation> findByGuestId(long guestId);
 }

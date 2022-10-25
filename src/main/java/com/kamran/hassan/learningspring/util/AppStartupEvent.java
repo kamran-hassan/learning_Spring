@@ -53,8 +53,8 @@ public class AppStartupEvent implements ApplicationListener<ApplicationReadyEven
 
         System.out.println("--------Search using Date value=-------");
         try {
-            Optional<Reservation> reservationByDate = this.reservationRepo.findByDate(new SimpleDateFormat("yyyy-mm-dd").parse("2022-01-01"));
-            if(reservationByDate.isPresent()) System.out.println(reservationByDate); else System.out.println("No data Found");
+            Iterable<Reservation> reservationByDate = this.reservationRepo.findByDate(new SimpleDateFormat("yyyy-mm-dd").parse("2022-01-01"));
+            reservationByDate.forEach(System.out::println);
         }
         catch (Exception e){
             System.out.println("Date Format Exception");
