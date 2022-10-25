@@ -1,5 +1,7 @@
 package com.kamran.hassan.learningspring.util;
 
+import com.kamran.hassan.learningspring.business.ReservationService;
+import com.kamran.hassan.learningspring.business.RoomReservation;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.ApplicationListener;
 import org.springframework.stereotype.Component;
@@ -12,6 +14,7 @@ import com.kamran.hassan.learningspring.data.GuestRepository;
 import com.kamran.hassan.learningspring.data.Reservation;
 import com.kamran.hassan.learningspring.data.ReservationRepo;
 
+import java.util.ArrayList;
 import java.util.Optional;
 
 import java.text.SimpleDateFormat;
@@ -24,11 +27,14 @@ public class AppStartupEvent implements ApplicationListener<ApplicationReadyEven
     private final RoomRepository roomRepository;
     private final GuestRepository guestRepository;
     private final ReservationRepo reservationRepo;
+    private final ReservationService reservationService;
 
-    public AppStartupEvent(RoomRepository roomRepository, GuestRepository guestRepository, ReservationRepo reservationRepo) {
+    public AppStartupEvent(RoomRepository roomRepository, GuestRepository guestRepository,
+                           ReservationRepo reservationRepo, ReservationService reservationService) {
         this.roomRepository = roomRepository;
         this.guestRepository = guestRepository;
         this.reservationRepo = reservationRepo;
+        this.reservationService = reservationService;
 
     }
 
@@ -60,6 +66,14 @@ public class AppStartupEvent implements ApplicationListener<ApplicationReadyEven
             System.out.println("Date Format Exception");
         }
 
+        System.out.println("----------Consuming Room Reservation Service---------");
+
+        ArrayList<RoomReservation> AllReservationDetailByDate = this.reservationService.getAllReservationDetailByDateString("2022-01-01");
+
+        if(AllReservationDetailByDate != null){
+            AllReservationDetailByDate.forEach(System.out::println);
+        }
+        else System.out.println("No Data return By Reservation Service for given date");
 
     }
 }
