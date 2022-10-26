@@ -11,4 +11,6 @@ public interface ReservationRepo extends CrudRepository<Reservation, Long> {
     Optional<Reservation> findByRoomId(long roomId);
     Iterable<Reservation> findByDate(Date date);
     Optional<Reservation> findByGuestId(long guestId);
+
+    
 }

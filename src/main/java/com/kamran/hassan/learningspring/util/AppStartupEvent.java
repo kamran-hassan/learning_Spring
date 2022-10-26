@@ -75,5 +75,9 @@ public class AppStartupEvent implements ApplicationListener<ApplicationReadyEven
         }
         else System.out.println("No Data return By Reservation Service for given date");
 
+        System.out.println(this.reservationService.addReservationService("Washington","V1","2022-2-26"));  //--> Error to be fixed in Future [ Fixed ]
+
+
+
     }
 }

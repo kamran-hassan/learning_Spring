@@ -49,6 +49,31 @@ public class ReservationService {
 
         return roomReservations;
     }
+    public Boolean addReservationService(String lastname, String roomNum, String date){
+        Optional<Room> r = this.roomRepository.findByroomNumber(roomNum);
+        Optional<Guest> g = this.guestRepository.findBylastName(lastname);
+        if(r.isPresent() && g.isPresent()){
+            long roomId = r.get().getId();
+            long guestId = g.get().getId();
+            try {
+                Date d = new SimpleDateFormat("yyyy-mm-dd").parse(date);
+                Reservation newReservation = new Reservation(roomId, guestId, d);
+                System.out.println(newReservation);
+                this.reservationRepo.save(newReservation);
+                return true;
+            }
+            catch (Exception e) {
+                System.out.println("Error ==>" + e.getMessage());
+            }
+        }
+        else System.out.println("Can Find Customer or Room ");
+
+        return false;
+    }
+
+    public void addGuest(Guest guest){
+        this.guestRepository.save(guest);
+    }
 
 
 
